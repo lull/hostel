@@ -4,15 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using mvcHostel.Models;
 
 namespace mvcHostel.Controllers
 {
-    public class roomController : ApiController
+    public class RoomController : ApiController
     {
+        hostelEntities context = new hostelEntities();
+
         // GET api/room
-        public IEnumerable<string> Get()
+        public int Get() //IEnumerable<room>
         {
-            return new string[] { "value1", "value2" };
+            return context.rooms.ToList().FirstOrDefault().idroom;
         }
 
         // GET api/room/5

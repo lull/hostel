@@ -18,7 +18,7 @@ namespace mvcHostel.Models
         {
             this.guest_in_room = new HashSet<guest_in_room>();
             this.room_photo = new HashSet<room_photo>();
-            this.equipment = new HashSet<equipment>();
+            this.equipments = new HashSet<equipment>();
         }
     
         public int idroom { get; set; }
@@ -28,6 +28,6 @@ namespace mvcHostel.Models
         public virtual ICollection<guest_in_room> guest_in_room { get; set; }
         public virtual ICollection<room_photo> room_photo { get; set; }
         public virtual room_type room_type { get; set; }
-        public virtual ICollection<equipment> equipment { get; set; }
+        public virtual ICollection<equipment> equipments { get; set; }
     }
 }

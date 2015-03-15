@@ -60,7 +60,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -136,31 +139,54 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\guestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\roomController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\equipment.cs" />
-    <Compile Include="Models\guest.cs" />
-    <Compile Include="Models\guest_get_equipment.cs" />
-    <Compile Include="Models\guest_in_room.cs" />
-    <Compile Include="Models\Repo\IEqipmentRepo.cs" />
-    <Compile Include="Models\Repo\IGuest_in_roomRepo.cs" />
-    <Compile Include="Models\Repo\IGuestRepo.cs" />
-    <Compile Include="Models\Repo\IGuest_get_equipmentRepo.cs" />
-    <Compile Include="Models\Repo\IOptional_equipmentRepo.cs" />
-    <Compile Include="Models\Repo\IRoomRepo.cs" />
-    <Compile Include="Models\Repo\IRoom_photoRepo.cs" />
-    <Compile Include="Models\Repo\IRoom_typeRepo.cs" />
-    <Compile Include="Models\Repo\ITransactionRepo.cs" />
-    <Compile Include="Models\optional_equipment.cs" />
-    <Compile Include="Models\room.cs" />
-    <Compile Include="Models\room_photo.cs" />
-    <Compile Include="Models\room_type.cs" />
-    <Compile Include="Models\transaction.cs" />
+    <Compile Include="Models\equipment.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guest.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guest_get_equipment.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guest_in_room.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HostelEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HostelEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HostelEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HostelEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HostelEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\optional_equipment.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room_photo.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room_type.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transaction.cs">
+      <DependentUpon>HostelEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +246,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="Models\HostelEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HostelEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\HostelEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HostelEntities.edmx</DependentUpon>
+      <LastGenOutput>HostelEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\HostelEntities.edmx.diagram">
+      <DependentUpon>HostelEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\HostelEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HostelEntities.edmx</DependentUpon>
+      <LastGenOutput>HostelEntities.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -268,6 +311,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

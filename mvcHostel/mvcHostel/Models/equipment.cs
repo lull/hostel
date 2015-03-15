@@ -16,13 +16,13 @@ namespace mvcHostel.Models
     {
         public equipment()
         {
-            this.room = new HashSet<room>();
+            this.rooms = new HashSet<room>();
         }
     
         public int idequipment { get; set; }
         public string name { get; set; }
         public string url { get; set; }
     
-        public virtual ICollection<room> room { get; set; }
+        public virtual ICollection<room> rooms { get; set; }
     }
 }

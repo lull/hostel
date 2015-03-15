@@ -16,7 +16,7 @@ namespace mvcHostel.Models
     {
         public room_type()
         {
-            this.room = new HashSet<room>();
+            this.rooms = new HashSet<room>();
         }
     
         public int idroom_type { get; set; }
@@ -26,6 +26,6 @@ namespace mvcHostel.Models
         public Nullable<bool> kitchen { get; set; }
         public string name { get; set; }
     
-        public virtual ICollection<room> room { get; set; }
+        public virtual ICollection<room> rooms { get; set; }
     }
 }

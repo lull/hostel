@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="hostelModel.Store" Alias="Self" Provider="Npgsql" ProviderManifestToken="9.4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="hostelModelStoreContainer">
+          <EntitySet Name="equipment" EntityType="hostelModel.Store.equipment" store:Type="Tables" Schema="public" />
+          <EntitySet Name="guest" EntityType="hostelModel.Store.guest" store:Type="Tables" Schema="public" />
+          <EntitySet Name="guest_get_equipment" EntityType="hostelModel.Store.guest_get_equipment" store:Type="Tables" Schema="public" />
+          <EntitySet Name="guest_in_room" EntityType="hostelModel.Store.guest_in_room" store:Type="Tables" Schema="public" />
+          <EntitySet Name="optional_equipment" EntityType="hostelModel.Store.optional_equipment" store:Type="Tables" Schema="public" />
+          <EntitySet Name="room" EntityType="hostelModel.Store.room" store:Type="Tables" Schema="public" />
+          <EntitySet Name="room_photo" EntityType="hostelModel.Store.room_photo" store:Type="Tables" Schema="public" />
+          <EntitySet Name="room_type" EntityType="hostelModel.Store.room_type" store:Type="Tables" Schema="public" />
+          <EntitySet Name="rooms_equipment" EntityType="hostelModel.Store.rooms_equipment" store:Type="Tables" Schema="public" />
+          <EntitySet Name="transaction" EntityType="hostelModel.Store.transaction" store:Type="Tables" Schema="public" />
+          <AssociationSet Name="guest_get_equipment_guest_idguest_fkey" Association="hostelModel.Store.guest_get_equipment_guest_idguest_fkey">
+            <End Role="guest" EntitySet="guest" />
+            <End Role="guest_get_equipment" EntitySet="guest_get_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="guest_get_equipment_optional_equipment_idoptional_equipmen_fkey" Association="hostelModel.Store.guest_get_equipment_optional_equipment_idoptional_equipmen_fkey">
+            <End Role="optional_equipment" EntitySet="optional_equipment" />
+            <End Role="guest_get_equipment" EntitySet="guest_get_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="guest_in_room_guest_idguest_fkey" Association="hostelModel.Store.guest_in_room_guest_idguest_fkey">
+            <End Role="guest" EntitySet="guest" />
+            <End Role="guest_in_room" EntitySet="guest_in_room" />
+          </AssociationSet>
+          <AssociationSet Name="guest_in_room_room_idroom_fkey" Association="hostelModel.Store.guest_in_room_room_idroom_fkey">
+            <End Role="room" EntitySet="room" />
+            <End Role="guest_in_room" EntitySet="guest_in_room" />
+          </AssociationSet>
+          <AssociationSet Name="room_photo_room_idroom_fkey" Association="hostelModel.Store.room_photo_room_idroom_fkey">
+            <End Role="room" EntitySet="room" />
+            <End Role="room_photo" EntitySet="room_photo" />
+          </AssociationSet>
+          <AssociationSet Name="room_room_type_idroom_type_fkey" Association="hostelModel.Store.room_room_type_idroom_type_fkey">
+            <End Role="room_type" EntitySet="room_type" />
+            <End Role="room" EntitySet="room" />
+          </AssociationSet>
+          <AssociationSet Name="rooms_equipment_equipment_idequipment_fkey" Association="hostelModel.Store.rooms_equipment_equipment_idequipment_fkey">
+            <End Role="equipment" EntitySet="equipment" />
+            <End Role="rooms_equipment" EntitySet="rooms_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="rooms_equipment_room_idroom_fkey" Association="hostelModel.Store.rooms_equipment_room_idroom_fkey">
+            <End Role="room" EntitySet="room" />
+            <End Role="rooms_equipment" EntitySet="rooms_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="transaction_guest_get_equipment_idguest_get_equipment_fkey" Association="hostelModel.Store.transaction_guest_get_equipment_idguest_get_equipment_fkey">
+            <End Role="guest_get_equipment" EntitySet="guest_get_equipment" />
+            <End Role="transaction" EntitySet="transaction" />
+          </AssociationSet>
+          <AssociationSet Name="transaction_guest_in_room_idguest_in_room_fkey" Association="hostelModel.Store.transaction_guest_in_room_idguest_in_room_fkey">
+            <End Role="guest_in_room" EntitySet="guest_in_room" />
+            <End Role="transaction" EntitySet="transaction" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="equipment">
+          <Key>
+            <PropertyRef Name="idequipment" />
+          </Key>
+          <Property Name="idequipment" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="url" Type="text" />
+        </EntityType>
+        <EntityType Name="guest">
+          <Key>
+            <PropertyRef Name="idguest" />
+          </Key>
+          <Property Name="idguest" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+          <Property Name="guest_comment" Type="text" />
+        </EntityType>
+        <EntityType Name="guest_get_equipment">
+          <Key>
+            <PropertyRef Name="idguest_get_equipment" />
+          </Key>
+          <Property Name="idguest_get_equipment" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="optional_equipment_idoptional_equipment" Type="int4" Nullable="false" />
+          <Property Name="guest_idguest" Type="int4" Nullable="false" />
+          <Property Name="date_from" Type="timestamptz" Nullable="false" />
+          <Property Name="date_to" Type="timestamptz" />
+        </EntityType>
+        <EntityType Name="guest_in_room">
+          <Key>
+            <PropertyRef Name="idguest_in_room" />
+          </Key>
+          <Property Name="idguest_in_room" Type="int4" Nullable="false" />
+          <Property Name="guest_idguest" Type="int4" Nullable="false" />
+          <Property Name="room_idroom" Type="int4" Nullable="false" />
+          <Property Name="date_from" Type="timestamptz" Nullable="false" />
+          <Property Name="date_to" Type="timestamptz" />
+        </EntityType>
+        <EntityType Name="optional_equipment">
+          <Key>
+            <PropertyRef Name="idoptional_equipment" />
+          </Key>
+          <Property Name="idoptional_equipment" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" />
+          <Property Name="optional_equipment_comment" Type="text" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="idroom" />
+          </Key>
+          <Property Name="idroom" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="room_type_idroom_type" Type="int4" Nullable="false" />
+          <Property Name="current_status" Type="int4" />
+        </EntityType>
+        <EntityType Name="room_photo">
+          <Key>
+            <PropertyRef Name="idroom_photo" />
+          </Key>
+          <Property Name="idroom_photo" Type="int4" Nullable="false" />
+          <Property Name="room_idroom" Type="int4" Nullable="false" />
+          <Property Name="url" Type="text" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="room_type">
+          <Key>
+            <PropertyRef Name="idroom_type" />
+          </Key>
+          <Property Name="idroom_type" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="count_single_bed" Type="int4" />
+          <Property Name="count_double_bed" Type="int4" />
+          <Property Name="count_room" Type="int4" />
+          <Property Name="kitchen" Type="bool" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="rooms_equipment">
+          <Key>
+            <PropertyRef Name="room_idroom" />
+            <PropertyRef Name="equipment_idequipment" />
+          </Key>
+          <Property Name="room_idroom" Type="int4" Nullable="false" />
+          <Property Name="equipment_idequipment" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="idtransaction" />
+          </Key>
+          <Property Name="idtransaction" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="guest_get_equipment_idguest_get_equipment" Type="int4" Nullable="false" />
+          <Property Name="guest_in_room_idguest_in_room" Type="int4" Nullable="false" />
+          <Property Name="date" Type="int4" />
+          <Property Name="sum" Type="float8" />
+        </EntityType>
+        <Association Name="guest_get_equipment_guest_idguest_fkey">
+          <End Role="guest" Type="hostelModel.Store.guest" Multiplicity="1" />
+          <End Role="guest_get_equipment" Type="hostelModel.Store.guest_get_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guest">
+              <PropertyRef Name="idguest" />
+            </Principal>
+            <Dependent Role="guest_get_equipment">
+              <PropertyRef Name="guest_idguest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="guest_get_equipment_optional_equipment_idoptional_equipmen_fkey">
+          <End Role="optional_equipment" Type="hostelModel.Store.optional_equipment" Multiplicity="1" />
+          <End Role="guest_get_equipment" Type="hostelModel.Store.guest_get_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="optional_equipment">
+              <PropertyRef Name="idoptional_equipment" />
+            </Principal>
+            <Dependent Role="guest_get_equipment">
+              <PropertyRef Name="optional_equipment_idoptional_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="guest_in_room_guest_idguest_fkey">
+          <End Role="guest" Type="hostelModel.Store.guest" Multiplicity="1" />
+          <End Role="guest_in_room" Type="hostelModel.Store.guest_in_room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guest">
+              <PropertyRef Name="idguest" />
+            </Principal>
+            <Dependent Role="guest_in_room">
+              <PropertyRef Name="guest_idguest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="guest_in_room_room_idroom_fkey">
+          <End Role="room" Type="hostelModel.Store.room" Multiplicity="1" />
+          <End Role="guest_in_room" Type="hostelModel.Store.guest_in_room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="idroom" />
+            </Principal>
+            <Dependent Role="guest_in_room">
+              <PropertyRef Name="room_idroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="room_photo_room_idroom_fkey">
+          <End Role="room" Type="hostelModel.Store.room" Multiplicity="1" />
+          <End Role="room_photo" Type="hostelModel.Store.room_photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="idroom" />
+            </Principal>
+            <Dependent Role="room_photo">
+              <PropertyRef Name="room_idroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="room_room_type_idroom_type_fkey">
+          <End Role="room_type" Type="hostelModel.Store.room_type" Multiplicity="1" />
+          <End Role="room" Type="hostelModel.Store.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_type">
+              <PropertyRef Name="idroom_type" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="room_type_idroom_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rooms_equipment_equipment_idequipment_fkey">
+          <End Role="equipment" Type="hostelModel.Store.equipment" Multiplicity="1" />
+          <End Role="rooms_equipment" Type="hostelModel.Store.rooms_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipment">
+              <PropertyRef Name="idequipment" />
+            </Principal>
+            <Dependent Role="rooms_equipment">
+              <PropertyRef Name="equipment_idequipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rooms_equipment_room_idroom_fkey">
+          <End Role="room" Type="hostelModel.Store.room" Multiplicity="1" />
+          <End Role="rooms_equipment" Type="hostelModel.Store.rooms_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="idroom" />
+            </Principal>
+            <Dependent Role="rooms_equipment">
+              <PropertyRef Name="room_idroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="transaction_guest_get_equipment_idguest_get_equipment_fkey">
+          <End Role="guest_get_equipment" Type="hostelModel.Store.guest_get_equipment" Multiplicity="1" />
+          <End Role="transaction" Type="hostelModel.Store.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guest_get_equipment">
+              <PropertyRef Name="idguest_get_equipment" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="guest_get_equipment_idguest_get_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="transaction_guest_in_room_idguest_in_room_fkey">
+          <End Role="guest_in_room" Type="hostelModel.Store.guest_in_room" Multiplicity="1" />
+          <End Role="transaction" Type="hostelModel.Store.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guest_in_room">
+              <PropertyRef Name="idguest_in_room" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="guest_in_room_idguest_in_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hostelModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="hostelEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="equipments" EntityType="hostelModel.equipment" />
+          <EntitySet Name="guests" EntityType="hostelModel.guest" />
+          <EntitySet Name="guest_get_equipment" EntityType="hostelModel.guest_get_equipment" />
+          <EntitySet Name="guest_in_room" EntityType="hostelModel.guest_in_room" />
+          <EntitySet Name="optional_equipment" EntityType="hostelModel.optional_equipment" />
+          <EntitySet Name="rooms" EntityType="hostelModel.room" />
+          <EntitySet Name="room_photo" EntityType="hostelModel.room_photo" />
+          <EntitySet Name="room_type" EntityType="hostelModel.room_type" />
+          <EntitySet Name="transactions" EntityType="hostelModel.transaction" />
+          <AssociationSet Name="guest_get_equipment_guest_idguest_fkey" Association="hostelModel.guest_get_equipment_guest_idguest_fkey">
+            <End Role="guest" EntitySet="guests" />
+            <End Role="guest_get_equipment" EntitySet="guest_get_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="guest_in_room_guest_idguest_fkey" Association="hostelModel.guest_in_room_guest_idguest_fkey">
+            <End Role="guest" EntitySet="guests" />
+            <End Role="guest_in_room" EntitySet="guest_in_room" />
+          </AssociationSet>
+          <AssociationSet Name="guest_get_equipment_optional_equipment_idoptional_equipmen_fkey" Association="hostelModel.guest_get_equipment_optional_equipment_idoptional_equipmen_fkey">
+            <End Role="optional_equipment" EntitySet="optional_equipment" />
+            <End Role="guest_get_equipment" EntitySet="guest_get_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="transaction_guest_get_equipment_idguest_get_equipment_fkey" Association="hostelModel.transaction_guest_get_equipment_idguest_get_equipment_fkey">
+            <End Role="guest_get_equipment" EntitySet="guest_get_equipment" />
+            <End Role="transaction" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="guest_in_room_room_idroom_fkey" Association="hostelModel.guest_in_room_room_idroom_fkey">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="guest_in_room" EntitySet="guest_in_room" />
+          </AssociationSet>
+          <AssociationSet Name="transaction_guest_in_room_idguest_in_room_fkey" Association="hostelModel.transaction_guest_in_room_idguest_in_room_fkey">
+            <End Role="guest_in_room" EntitySet="guest_in_room" />
+            <End Role="transaction" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="room_photo_room_idroom_fkey" Association="hostelModel.room_photo_room_idroom_fkey">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="room_photo" EntitySet="room_photo" />
+          </AssociationSet>
+          <AssociationSet Name="room_room_type_idroom_type_fkey" Association="hostelModel.room_room_type_idroom_type_fkey">
+            <End Role="room_type" EntitySet="room_type" />
+            <End Role="room" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="rooms_equipment" Association="hostelModel.rooms_equipment">
+            <End Role="equipment" EntitySet="equipments" />
+            <End Role="room" EntitySet="rooms" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="equipment">
+          <Key>
+            <PropertyRef Name="idequipment" />
+          </Key>
+          <Property Name="idequipment" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="url" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="rooms" Relationship="hostelModel.rooms_equipment" FromRole="equipment" ToRole="room" />
+        </EntityType>
+        <EntityType Name="guest">
+          <Key>
+            <PropertyRef Name="idguest" />
+          </Key>
+          <Property Name="idguest" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="guest_comment" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="guest_get_equipment" Relationship="hostelModel.guest_get_equipment_guest_idguest_fkey" FromRole="guest" ToRole="guest_get_equipment" />
+          <NavigationProperty Name="guest_in_room" Relationship="hostelModel.guest_in_room_guest_idguest_fkey" FromRole="guest" ToRole="guest_in_room" />
+        </EntityType>
+        <EntityType Name="guest_get_equipment">
+          <Key>
+            <PropertyRef Name="idguest_get_equipment" />
+          </Key>
+          <Property Name="idguest_get_equipment" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="optional_equipment_idoptional_equipment" Type="Int32" Nullable="false" />
+          <Property Name="guest_idguest" Type="Int32" Nullable="false" />
+          <Property Name="date_from" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="date_to" Type="DateTimeOffset" Precision="7" />
+          <NavigationProperty Name="guest" Relationship="hostelModel.guest_get_equipment_guest_idguest_fkey" FromRole="guest_get_equipment" ToRole="guest" />
+          <NavigationProperty Name="optional_equipment" Relationship="hostelModel.guest_get_equipment_optional_equipment_idoptional_equipmen_fkey" FromRole="guest_get_equipment" ToRole="optional_equipment" />
+          <NavigationProperty Name="transactions" Relationship="hostelModel.transaction_guest_get_equipment_idguest_get_equipment_fkey" FromRole="guest_get_equipment" ToRole="transaction" />
+        </EntityType>
+        <EntityType Name="guest_in_room">
+          <Key>
+            <PropertyRef Name="idguest_in_room" />
+          </Key>
+          <Property Name="idguest_in_room" Type="Int32" Nullable="false" />
+          <Property Name="guest_idguest" Type="Int32" Nullable="false" />
+          <Property Name="room_idroom" Type="Int32" Nullable="false" />
+          <Property Name="date_from" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="date_to" Type="DateTimeOffset" Precision="7" />
+          <NavigationProperty Name="guest" Relationship="hostelModel.guest_in_room_guest_idguest_fkey" FromRole="guest_in_room" ToRole="guest" />
+          <NavigationProperty Name="room" Relationship="hostelModel.guest_in_room_room_idroom_fkey" FromRole="guest_in_room" ToRole="room" />
+          <NavigationProperty Name="transactions" Relationship="hostelModel.transaction_guest_in_room_idguest_in_room_fkey" FromRole="guest_in_room" ToRole="transaction" />
+        </EntityType>
+        <EntityType Name="optional_equipment">
+          <Key>
+            <PropertyRef Name="idoptional_equipment" />
+          </Key>
+          <Property Name="idoptional_equipment" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="8000" Unicode="true" FixedLength="false" />
+          <Property Name="optional_equipment_comment" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="guest_get_equipment" Relationship="hostelModel.guest_get_equipment_optional_equipment_idoptional_equipmen_fkey" FromRole="optional_equipment" ToRole="guest_get_equipment" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="idroom" />
+          </Key>
+          <Property Name="idroom" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="room_type_idroom_type" Type="Int32" Nullable="false" />
+          <Property Name="current_status" Type="Int32" />
+          <NavigationProperty Name="guest_in_room" Relationship="hostelModel.guest_in_room_room_idroom_fkey" FromRole="room" ToRole="guest_in_room" />
+          <NavigationProperty Name="room_photo" Relationship="hostelModel.room_photo_room_idroom_fkey" FromRole="room" ToRole="room_photo" />
+          <NavigationProperty Name="room_type" Relationship="hostelModel.room_room_type_idroom_type_fkey" FromRole="room" ToRole="room_type" />
+          <NavigationProperty Name="equipments" Relationship="hostelModel.rooms_equipment" FromRole="room" ToRole="equipment" />
+        </EntityType>
+        <EntityType Name="room_photo">
+          <Key>
+            <PropertyRef Name="idroom_photo" />
+          </Key>
+          <Property Name="idroom_photo" Type="Int32" Nullable="false" />
+          <Property Name="room_idroom" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="room" Relationship="hostelModel.room_photo_room_idroom_fkey" FromRole="room_photo" ToRole="room" />
+        </EntityType>
+        <EntityType Name="room_type">
+          <Key>
+            <PropertyRef Name="idroom_type" />
+          </Key>
+          <Property Name="idroom_type" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="count_single_bed" Type="Int32" />
+          <Property Name="count_double_bed" Type="Int32" />
+          <Property Name="count_room" Type="Int32" />
+          <Property Name="kitchen" Type="Boolean" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="rooms" Relationship="hostelModel.room_room_type_idroom_type_fkey" FromRole="room_type" ToRole="room" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="idtransaction" />
+          </Key>
+          <Property Name="idtransaction" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="guest_get_equipment_idguest_get_equipment" Type="Int32" Nullable="false" />
+          <Property Name="guest_in_room_idguest_in_room" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="Int32" />
+          <Property Name="sum" Type="Double" />
+          <NavigationProperty Name="guest_get_equipment" Relationship="hostelModel.transaction_guest_get_equipment_idguest_get_equipment_fkey" FromRole="transaction" ToRole="guest_get_equipment" />
+          <NavigationProperty Name="guest_in_room" Relationship="hostelModel.transaction_guest_in_room_idguest_in_room_fkey" FromRole="transaction" ToRole="guest_in_room" />
+        </EntityType>
+        <Association Name="guest_get_equipment_guest_idguest_fkey">
+          <End Role="guest" Type="hostelModel.guest" Multiplicity="1" />
+          <End Role="guest_get_equipment" Type="hostelModel.guest_get_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guest">
+              <PropertyRef Name="idguest" />
+            </Principal>
+            <Dependent Role="guest_get_equipment">
+              <PropertyRef Name="guest_idguest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="guest_in_room_guest_idguest_fkey">
+          <End Role="guest" Type="hostelModel.guest" Multiplicity="1" />
+          <End Role="guest_in_room" Type="hostelModel.guest_in_room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guest">
+              <PropertyRef Name="idguest" />
+            </Principal>
+            <Dependent Role="guest_in_room">
+              <PropertyRef Name="guest_idguest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="guest_get_equipment_optional_equipment_idoptional_equipmen_fkey">
+          <End Role="optional_equipment" Type="hostelModel.optional_equipment" Multiplicity="1" />
+          <End Role="guest_get_equipment" Type="hostelModel.guest_get_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="optional_equipment">
+              <PropertyRef Name="idoptional_equipment" />
+            </Principal>
+            <Dependent Role="guest_get_equipment">
+              <PropertyRef Name="optional_equipment_idoptional_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="transaction_guest_get_equipment_idguest_get_equipment_fkey">
+          <End Role="guest_get_equipment" Type="hostelModel.guest_get_equipment" Multiplicity="1" />
+          <End Role="transaction" Type="hostelModel.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guest_get_equipment">
+              <PropertyRef Name="idguest_get_equipment" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="guest_get_equipment_idguest_get_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="guest_in_room_room_idroom_fkey">
+          <End Role="room" Type="hostelModel.room" Multiplicity="1" />
+          <End Role="guest_in_room" Type="hostelModel.guest_in_room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="idroom" />
+            </Principal>
+            <Dependent Role="guest_in_room">
+              <PropertyRef Name="room_idroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="transaction_guest_in_room_idguest_in_room_fkey">
+          <End Role="guest_in_room" Type="hostelModel.guest_in_room" Multiplicity="1" />
+          <End Role="transaction" Type="hostelModel.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guest_in_room">
+              <PropertyRef Name="idguest_in_room" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="guest_in_room_idguest_in_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="room_photo_room_idroom_fkey">
+          <End Role="room" Type="hostelModel.room" Multiplicity="1" />
+          <End Role="room_photo" Type="hostelModel.room_photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="idroom" />
+            </Principal>
+            <Dependent Role="room_photo">
+              <PropertyRef Name="room_idroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="room_room_type_idroom_type_fkey">
+          <End Role="room_type" Type="hostelModel.room_type" Multiplicity="1" />
+          <End Role="room" Type="hostelModel.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_type">
+              <PropertyRef Name="idroom_type" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="room_type_idroom_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rooms_equipment">
+          <End Role="equipment" Type="hostelModel.equipment" Multiplicity="*" />
+          <End Role="room" Type="hostelModel.room" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hostelModelStoreContainer" CdmEntityContainer="hostelEntities">
+          <EntitySetMapping Name="equipments">
+            <EntityTypeMapping TypeName="hostelModel.equipment">
+              <MappingFragment StoreEntitySet="equipment">
+                <ScalarProperty Name="idequipment" ColumnName="idequipment" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guests">
+            <EntityTypeMapping TypeName="hostelModel.guest">
+              <MappingFragment StoreEntitySet="guest">
+                <ScalarProperty Name="idguest" ColumnName="idguest" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="guest_comment" ColumnName="guest_comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guest_get_equipment">
+            <EntityTypeMapping TypeName="hostelModel.guest_get_equipment">
+              <MappingFragment StoreEntitySet="guest_get_equipment">
+                <ScalarProperty Name="idguest_get_equipment" ColumnName="idguest_get_equipment" />
+                <ScalarProperty Name="optional_equipment_idoptional_equipment" ColumnName="optional_equipment_idoptional_equipment" />
+                <ScalarProperty Name="guest_idguest" ColumnName="guest_idguest" />
+                <ScalarProperty Name="date_from" ColumnName="date_from" />
+                <ScalarProperty Name="date_to" ColumnName="date_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guest_in_room">
+            <EntityTypeMapping TypeName="hostelModel.guest_in_room">
+              <MappingFragment StoreEntitySet="guest_in_room">
+                <ScalarProperty Name="idguest_in_room" ColumnName="idguest_in_room" />
+                <ScalarProperty Name="guest_idguest" ColumnName="guest_idguest" />
+                <ScalarProperty Name="room_idroom" ColumnName="room_idroom" />
+                <ScalarProperty Name="date_from" ColumnName="date_from" />
+                <ScalarProperty Name="date_to" ColumnName="date_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="optional_equipment">
+            <EntityTypeMapping TypeName="hostelModel.optional_equipment">
+              <MappingFragment StoreEntitySet="optional_equipment">
+                <ScalarProperty Name="idoptional_equipment" ColumnName="idoptional_equipment" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="optional_equipment_comment" ColumnName="optional_equipment_comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="hostelModel.room">
+              <MappingFragment StoreEntitySet="room">
+                <ScalarProperty Name="idroom" ColumnName="idroom" />
+                <ScalarProperty Name="room_type_idroom_type" ColumnName="room_type_idroom_type" />
+                <ScalarProperty Name="current_status" ColumnName="current_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room_photo">
+            <EntityTypeMapping TypeName="hostelModel.room_photo">
+              <MappingFragment StoreEntitySet="room_photo">
+                <ScalarProperty Name="idroom_photo" ColumnName="idroom_photo" />
+                <ScalarProperty Name="room_idroom" ColumnName="room_idroom" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room_type">
+            <EntityTypeMapping TypeName="hostelModel.room_type">
+              <MappingFragment StoreEntitySet="room_type">
+                <ScalarProperty Name="idroom_type" ColumnName="idroom_type" />
+                <ScalarProperty Name="count_single_bed" ColumnName="count_single_bed" />
+                <ScalarProperty Name="count_double_bed" ColumnName="count_double_bed" />
+                <ScalarProperty Name="count_room" ColumnName="count_room" />
+                <ScalarProperty Name="kitchen" ColumnName="kitchen" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transactions">
+            <EntityTypeMapping TypeName="hostelModel.transaction">
+              <MappingFragment StoreEntitySet="transaction">
+                <ScalarProperty Name="idtransaction" ColumnName="idtransaction" />
+                <ScalarProperty Name="guest_get_equipment_idguest_get_equipment" ColumnName="guest_get_equipment_idguest_get_equipment" />
+                <ScalarProperty Name="guest_in_room_idguest_in_room" ColumnName="guest_in_room_idguest_in_room" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="rooms_equipment" TypeName="hostelModel.rooms_equipment" StoreEntitySet="rooms_equipment">
+            <EndProperty Name="equipment">
+              <ScalarProperty Name="idequipment" ColumnName="equipment_idequipment" />
+            </EndProperty>
+            <EndProperty Name="room">
+              <ScalarProperty Name="idroom" ColumnName="room_idroom" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

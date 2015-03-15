@@ -16,7 +16,7 @@ namespace mvcHostel.Models
     {
         public guest_in_room()
         {
-            this.transaction = new HashSet<transaction>();
+            this.transactions = new HashSet<transaction>();
         }
     
         public int idguest_in_room { get; set; }
@@ -27,6 +27,6 @@ namespace mvcHostel.Models
     
         public virtual guest guest { get; set; }
         public virtual room room { get; set; }
-        public virtual ICollection<transaction> transaction { get; set; }
+        public virtual ICollection<transaction> transactions { get; set; }
     }
 }

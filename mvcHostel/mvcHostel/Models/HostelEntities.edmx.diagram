@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f509ce268e394ec4a7f7e28085bda421" Name="Diagram1">
+        <EntityTypeShape EntityType="hostelModel.equipment" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="hostelModel.guest" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hostelModel.guest_get_equipment" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hostelModel.guest_in_room" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hostelModel.optional_equipment" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="hostelModel.room" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hostelModel.room_photo" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hostelModel.room_type" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hostelModel.transaction" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="hostelModel.guest_get_equipment_guest_idguest_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="hostelModel.guest_in_room_guest_idguest_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="hostelModel.guest_get_equipment_optional_equipment_idoptional_equipmen_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="hostelModel.transaction_guest_get_equipment_idguest_get_equipment_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="hostelModel.guest_in_room_room_idroom_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="hostelModel.transaction_guest_in_room_idguest_in_room_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="hostelModel.room_photo_room_idroom_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="hostelModel.room_room_type_idroom_type_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="hostelModel.rooms_equipment" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
